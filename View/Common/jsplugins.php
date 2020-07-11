@@ -43,7 +43,7 @@ async defer></script>
 <script src="../Common/assets/js/dashboard.js"></script>
 <script src="../Common/assets/js/chart.js"></script>
 <script src="../Common/assets/js/wizard.js"></script>
-<script src="../Sales/js/calculations.js"></script>
+<script src="../SYS/calculations.js"></script>
 <script>
     if (document.getElementById('fileupload')) {
         var myDropzone = new Dropzone("div#fileupload", {url: "../../Services/QuotationService.php", paramName: "attacht"});

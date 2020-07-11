@@ -19,7 +19,7 @@
                     
                     <li style="border-right: 1px solid #e8e8e8;padding-left: 10px;">&nbsp;</li>
                     <li style="padding-left: 10px;" class="nav-item nav-profile dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                        <a class="nav-link dropdown-toggle" href="../Common/logout.php">
                             <i class="ti-power-off text-primary"></i>
                             Logout
                         </a>                        

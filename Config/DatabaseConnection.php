@@ -5,20 +5,22 @@
  *
  * @author PASINDU SIRIWARDANA
  */
+include 'SMTPEmailConfig.php';
 class DatabaseConnection {
 
     private $serverHost = "localhost";
+    private $timezone = 'Pacific/Auckland';
+    
     //DEVELOPMENT ENVIRONMENT
-    private $databaseName = "brassband";
-    private $userName = "root";
-    private $password = "";
-    private $timezone = 'Asia/Colombo';
-    private $trackingEmail = ",pasindups@gmail.com";
+//    private $databaseName = "brassband";
+//    private $userName = "root";
+//    private $password = "";
+    
 
     //PROD ENVIRONMENT
-//    private $databaseName = "mrarachc_mrarachchi";
-//    private $userName = "mrarachc_root";
-//    private $password = "madura123";
+    private $databaseName = "iclick_brassband";
+    private $userName = "iclick_brass";
+    private $password = "brass@123";
 
     /*
      * connecting to the database using provided variables
@@ -54,9 +56,10 @@ class DatabaseConnection {
 
         $connection = $this->openConnection();
         if (!mysqli_query($connection, $sqlQuery)) {
+            $this->writeErrorLog(mysqli_error($connection));
             echo("Error description: " . mysqli_error($connection));
             $this->createExpFile(mysqli_error($connection));
-            //die();
+            die();
         } else {
             if ($insrtid) {
                 return $connection->insert_id;
@@ -111,32 +114,6 @@ class DatabaseConnection {
         echo 'File created:' . $extFile . " EXP: " . $expMessage;
     }
 
-    
-
-    function sendInquiry($to) {
-
-        $databaseConnection = new DatabaseConnection();
-        $databaseConnection->openConnection();
-
-        // Always set content-type when sending HTML email
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers = $headers . "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-
-        $message = "New inquiry from mobile app : ";
-        $query = "SELECT * FROM inquiry where email='$to' and status!=0";
-        $result = $databaseConnection->openConnection()->query($query);
-
-        if ($row = $result->fetch_assoc()) {
-            $message = $message . $row['name'] . " wants to have an inquiry about ".$row['service']."";
-        }
-        $to = $to . $databaseConnection->trackingEmail . "," . $_SESSION['email'];
-        mail($to, "New customer inquiry", $message, $headers);
-
-        $databaseConnection->executeQuery("update accounts set status=1 where acc_id=0 ", " Client Registration Link Email template " . $templateId . " sent to " . $to);
-    }
-
-   
 //Generate sql queries and form tags-23042020-Pasindu
     function generateFieldsforColumns($tablename) {
 
@@ -181,6 +158,32 @@ class DatabaseConnection {
                     <input id="' . $row1['COLUMN_NAME'] . '" value="' . $row1['COLUMN_NAME'] . '" type="text" name="' . $row1['COLUMN_NAME'] . '" class="form-control" required >
         </div>';
             }
+        }
+    }
+
+    function sendEmailNotification($ref_number,$mem_id,$return_date) {
+
+        $databaseConnection = new DatabaseConnection();
+        $databaseConnection->openConnection();
+        $MailHelper = new SMTPEmailConfig();
+
+        $helloName = ""; //(Inside the email template);
+        $required_date = $return_date; //(Inside the email template);        
+        $to = "";
+        
+        $querya = "select name,email from membership WHERE mem_id='$mem_id'";
+        $resulta = $databaseConnection->openConnection()->query($querya);
+        if ($rowa = $resulta->fetch_assoc()) {
+            $helloName = $rowa['name'];
+            $to = $rowa['email'];
+        }
+
+        $message = "Hello $helloName, You have rented items from Marlborough Brass Band. Ref Number : $ref_number";
+
+        if ($MailHelper->openSMTP($to, $subject, $message) == 1) {
+            $databaseConnection->executeQuery("update membership set status=1 where mem_id=0", $ref_number . " notification email sent to " . $to);
+        } else {
+            $databaseConnection->executeQuery("update membership set status=1 where mem_id=0", "Email sent Failed from sendEmailNotification() " . $ref_number);
         }
     }
 

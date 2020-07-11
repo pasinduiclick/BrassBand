@@ -37,16 +37,7 @@ if (!isset($titlename)) {
         <link rel="stylesheet" href="../Common/assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
         <link rel="stylesheet" href="../Common/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
         <link rel="stylesheet" href="../Common/assets/vendors/summernote/dist/summernote-bs4.css">
-        <!-- End plugin css-->
-        <!-- inject:css -->
-        <?php if (isset($_SESSION["loginreqclient"])) { ?>
-            <link rel="stylesheet" href="../Common/assets/css/horizontal-layout-light/style.css">
-        <?php } else { ?>
-            <link rel="stylesheet" href="../Common/assets/css/vertical-layout-light/style.css">
-        <?php } ?>
-
-
-
+       <link rel="stylesheet" href="../Common/assets/css/vertical-layout-light/style.css">
 
         <!-- endinject -->
         <link rel="shortcut icon" href="../Common/assets/images/favicon.png" />
