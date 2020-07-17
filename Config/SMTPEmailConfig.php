@@ -5,7 +5,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 require 'PHPMailer-master/src/Exception.php';
 require 'PHPMailer-master/src/PHPMailer.php';
 require 'PHPMailer-master/src/SMTP.php';
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -19,28 +18,33 @@ require 'PHPMailer-master/src/SMTP.php';
  */
 class SMTPEmailConfig {
 
-    function openSMTP($email,$subject,$content) {
+    function openSMTP($email, $subject, $content) {
+
+        session_start();
+        
         $status = 0;
         $mail = new PHPMailer();
         $mail->IsSMTP();
-        $mail->Mailer = "smtp";
 
+        $mail->Mailer = "smtp";
         $mail->SMTPDebug = 1;
         $mail->SMTPAuth = TRUE;
-        $mail->SMTPSecure = "STARTTLS";
-        $mail->Port = 587;
-        $mail->Host = "smtp.office365.com";
-        $mail->Username = "notification@Identimark.com";
-        $mail->Password = "System2020";
+        $mail->SMTPSecure = "tls";
+        $mail->Port = $_SESSION['portnum'];
+        $mail->Host = $_SESSION['host'];
+        $mail->Username = $_SESSION['smtpusername'];
+        $mail->Password =  $_SESSION['smtppasswrd'];       
+
+        $toemail = $_SESSION['smtpusername'];
         $mail->IsHTML(true);
-        $mail->SetFrom("notification@Identimark.com", "Identimark Notification");
-        $mail->AddReplyTo("notification@identimark.com", "Identimark Notification");
-        $mail->AddCC("notification@identimark.com", "Identimark Notification");
+        $mail->SetFrom($toemail, "Brass Band Notification");
+        $mail->AddReplyTo($toemail, "Brass Band Notification");
+        $mail->AddCC($toemail, "Brass Band Notification");
         $mail->AddCC("pasindu@iclick.co.nz", "Testing ICLICK");
 
-        $mail->AddAddress($email, "Member");
+        $mail->AddAddress($email, "Pasindu");
         $mail->Subject = $subject;
-        
+
         $mail->MsgHTML($content);
         if (!$mail->Send()) {
             echo "Error while sending Email.";
@@ -49,7 +53,7 @@ class SMTPEmailConfig {
             echo "Email sent successfully";
             $status = 1;
         }
-        
+
         return $status;
     }
 

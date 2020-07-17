@@ -12,15 +12,15 @@ class DatabaseConnection {
     private $timezone = 'Pacific/Auckland';
     
     //DEVELOPMENT ENVIRONMENT
-//    private $databaseName = "brassband";
-//    private $userName = "root";
-//    private $password = "";
+    private $databaseName = "brassband";
+    private $userName = "root";
+    private $password = "";
     
 
     //PROD ENVIRONMENT
-    private $databaseName = "iclick_brassband";
-    private $userName = "iclick_brass";
-    private $password = "brass@123";
+//    private $databaseName = "iclick_brassband";
+//    private $userName = "iclick_brass";
+//    private $password = "brass@123";
 
     /*
      * connecting to the database using provided variables
@@ -35,6 +35,16 @@ class DatabaseConnection {
         return $conn;
     }
 
+    function openSMPTP() {
+        $query = "SELECT * from emailconfig";
+        $result =  $this->openConnection()->query($query);
+        while ($row = $result->fetch_assoc()) {
+            $_SESSION['portnum'] = $row['portnum'];
+            $_SESSION['host'] = $row['host'];
+            $_SESSION['smtpusername'] = $row['username'];
+            $_SESSION['smtppasswrd'] = $row['passwrd'];
+        }
+    }
     /*
      * passing parameter as a string and open the database connection, after that
      * executing the query.
@@ -55,6 +65,8 @@ class DatabaseConnection {
         $transSql = "insert into log values (0,'$username','$transDateTime','$ipAddress','$description')";
 
         $connection = $this->openConnection();
+        $this->openSMPTP();
+        
         if (!mysqli_query($connection, $sqlQuery)) {
             $this->writeErrorLog(mysqli_error($connection));
             echo("Error description: " . mysqli_error($connection));

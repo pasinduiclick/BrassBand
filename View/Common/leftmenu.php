@@ -68,6 +68,13 @@
                     <span class="menu-title">System Users</span>
                 </a>
             </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="../SYS/emailConfig.php">
+                    <i class="ti-user menu-icon"></i>
+                    <span class="menu-title">System Email</span>
+                </a>
+            </li>
         </ul>
     </nav>
     <div class="main-panel">

@@ -80,7 +80,7 @@ if ($serviceFlag == "ISSUEUNI") {
     }
 
     $clib->add_flash_msg(Messages::$dataSaveSuccessMsg, CommonLib::MSG_OK);
-    //$databaseConnection->sendEmailNotification($ref_number);        
+    $databaseConnection->sendEmailNotification($ref_number,$mem_id,$return_date);       
     header("Location:../View/SYS/Issue_UNI.php");
 }
 
