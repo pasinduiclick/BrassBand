@@ -25,9 +25,9 @@ $clib->csrf_verify();
 
 if ($_POST["serviceFlag"] == "USERLOGIN") {
     $username = $clib->input("username");
-    $password = $clib->input("passwrd");
+    $password = $clib->input("passwrd");    
     $encPassword = password_hash($password, PASSWORD_DEFAULT);
-    $query = "SELECT * FROM users where username='$username' and status=1";
+    $query = "SELECT * FROM users where username='$username' and status!=0";
     $result = $databaseConnection->openConnection()->query($query);
     if ($row = $result->fetch_assoc()) {
         if (password_verify($password, $row['passwrd'])) {
@@ -35,6 +35,7 @@ if ($_POST["serviceFlag"] == "USERLOGIN") {
             $_SESSION['email'] = $row['email'];
             $_SESSION['fullName'] = $row['full_name'];
             $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['user_type'] = $row['status'];
             $curtime = date("Y-m-d H:i:s");
             $userIdh = $row['user_id'];
             $databaseConnection->executeQuery("delete from users where passwrd='0'", $username . " logged into system");
@@ -59,9 +60,10 @@ if ($serviceFlag == "ADDNEWUSER") {
     $encPassword = password_hash($passwrd, PASSWORD_DEFAULT);
     $full_name = $clib->input("full_name");
     $email = $clib->input("email");
+    $usertype = $clib->input("usertype");
     $created = $databaseConnection->getTransactionDate();
 
-    $sqlQuery = "INSERT INTO users (username,passwrd,full_name,email,status,created) VALUES('$username','$encPassword','$full_name','$email','1','$created')";
+    $sqlQuery = "INSERT INTO users (username,passwrd,full_name,email,status,created) VALUES('$username','$encPassword','$full_name','$email','$usertype','$created')";
     $result = $databaseConnection->executeQuery($sqlQuery, $username . " User Added " . $serviceFlag);
     $clib->add_flash_msg(Messages::$dataSaveSuccessMsg, CommonLib::MSG_OK);
     header("Location:../View/SYS/Users.php");

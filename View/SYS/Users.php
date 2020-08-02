@@ -12,7 +12,7 @@ include '../Common/leftmenu.php';
         <?php include '../Common/showMessage.php'; ?>
         <div class="card-body" >
             <h4 class="card-title">All System Users</h4>
-            <div style="display: initial;" data-placement="right" title="Add a Member" data-toggle="tooltip"><button data-toggle="modal" data-target="#AddCutter" type="button"  class="btn btn-inverse-primary btn-fw"><i  class="fa fa-plus"></i></button></div> 
+            <div style="display: initial;" data-placement="right" title="Add User" data-toggle="tooltip"><button data-toggle="modal" data-target="#AddCutter" type="button"  class="btn btn-inverse-primary btn-fw"><i  class="fa fa-plus"></i></button></div> 
 
             <!-- Modal Add Customer-->
             <div class="modal fade "   id="AddCutter"  tabindex="-1" role="dialog"
@@ -24,21 +24,29 @@ include '../Common/leftmenu.php';
                         </button>
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-md-4 d-sm-flex align-items-end round-corners-center" style="background-image: url('../Common/assets/modal-x/img/users.png')">
+                                <div class="col-md-4 d-sm-flex align-items-end round-corners-center" style="background-image: url('../Common/assets/modal-x/img/usrs.jpg')">
                                     <div style="display:block;height:200px;"></div>
                                 </div>
 
                                 <div class="col-md-8 py-5 px-sm-5 ">
-                                    <span class="inner-modal-title" style="text-align:left !important">Add New Music</span>
+                                    <span class="inner-modal-title" style="text-align:left !important">Add New User</span>
 
                                     <form class="cmxform" id="commentForm" method="post" enctype="multipart/form-data" action="../../Service/UserService.php">
                                         <div class="form-row">
+                                            <div class="form-group col-md-12 icon_input_container">
+                                                <label for="usertype">User Type</label>                                                
+                                                <select id="usertype" name="usertype" class="form-control" required>
+                                                    <option value="">Select</option>
+                                                    <option value="1">Admin User</option>
+                                                    <option value="2">System User</option>
+                                                </select>
+                                            </div>
                                             <div class="form-group col-md-12 icon_input_container">
                                                 <label for="username">Username</label>
                                                 <input id="username" type="text" name="username" class="form-control" required >
                                             </div><div class="form-group col-md-12 icon_input_container">
                                                 <label for="passwrd">Password</label>
-                                                <input id="passwrd" type="text" name="passwrd" class="form-control" required >
+                                                <input id="passwrd" type="password" name="passwrd" class="form-control" required >
                                             </div><div class="form-group col-md-12 icon_input_container">
                                                 <label for="full_name">Full Name</label>
                                                 <input id="full_name" type="text" name="full_name" class="form-control" required >
@@ -69,20 +77,26 @@ include '../Common/leftmenu.php';
                                 <tr>
                                     <th>Full Name</th>
                                     <th>Email</th>
-                                    <th>Username</th>                                                                      
+                                    <th>Username</th>
+                                    <th>Type</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $query = "SELECT * from users where status=1";
+                                $query = "SELECT * from users where status!=0";
                                 $result = $databaseConnection->openConnection()->query($query);
                                 while ($row = $result->fetch_assoc()) {
                                     echo '<tr>
                                                         <td>' . $row['full_name'] . '</td>
                                                        <td>' . $row['email'] . '</td>'
-                                    . '<td>' . $row['username'] . '</td>'
-                                    . '<td><div class="btn-group" role="group" aria-label="Basic example">                                                           
+                                    . '<td>' . $row['username'] . '</td>';
+                                    if ($row['status']==1) {
+                                        echo '<td>Admin User</td>';
+                                    } else {
+                                        echo '<td>System User</td>';
+                                    }
+                                    echo '<td><div class="btn-group" role="group" aria-label="Basic example">                                                           
                                                             <button class="btn btn-sm btn-inverse-danger btn-fw" data-placement="right" title="Delete User" data-toggle="tooltip"  onclick="return showSwal(' . "'warning-message-and-cancel','../../Service/UserService.php?serviceFlag=DELUSER&user_id=" . $row['user_id'] . "&csrf_token=" . $clib->get_csrf_token(true) . "'" . ')"><i class="fa fa-trash"></i></button>  
                                                         </div>
                        </div>

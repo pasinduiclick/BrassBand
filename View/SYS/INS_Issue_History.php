@@ -34,7 +34,7 @@ $mem_id = $_GET['mem_id'];
                             <tbody>
 
                                 <?php
-                                $query = "SELECT * FROM issue_ins ii, membership m, instruments i WHERE ii.mem_id=m.mem_id AND ii.ins_id=i.ins_id AND ii.status=1 AND ii.mem_id='$mem_id'";
+                                $query = "SELECT *,ii.status AS SS FROM issue_ins ii, membership m, instruments i WHERE ii.mem_id=m.mem_id AND ii.ins_id=i.ins_id AND ii.mem_id='$mem_id' ORDER BY ii.issue_date DESC";
                                 $result = $databaseConnection->openConnection()->query($query);
                                 while ($row = $result->fetch_assoc()) {
                                     echo '<tr>
@@ -46,9 +46,13 @@ $mem_id = $_GET['mem_id'];
                                     . '<td>' . $row['issue_date'] . '</td>'
                                     . '<td>' . $row['return_date'] . '</td>'
                                     . '<td>' . $row['qty'] . '</td>'
-                                            . '<td><div class="btn-group" role="group" aria-label="Basic example">                                                            
-                                                            <button class="btn btn-sm btn-inverse-danger btn-fw" data-placement="right" title="Item Returned" data-toggle="tooltip"  onclick="return showSwal(' . "'warning-message-and-cancel','../../Service/IssueService.php?serviceFlag=INSRETURN&ref_number=" . $row['ref_number'] . "&csrf_token=" . $clib->get_csrf_token(true) . "'" . ')"><i class="fa fa-archive"></i></button>  
-                                                        </div></td><tr>';
+                                    . '<td><div class="btn-group" role="group" aria-label="Basic example">';
+                                    if ($row['SS']==1) {
+                                     echo '<button class="btn btn-sm btn-inverse-danger btn-fw" data-placement="right" title="Item Returned" data-toggle="tooltip"  onclick="return showSwal(' . "'warning-message-and-cancel','../../Service/IssueService.php?serviceFlag=INSRETURN&ref_number=" . $row['ref_number'] . "&csrf_token=" . $clib->get_csrf_token(true) . "'" . ')"><i class="fa fa-archive"></i></button>';   
+                                    } else {
+                                        echo '<b style="color:green">Returned</b>';    
+                                    }                                   
+                                    echo '</div></td><tr>';
                                 }
                                 ?>
                             </tbody>

@@ -12,7 +12,7 @@ include '../Common/leftmenu.php';
         <?php include '../Common/showMessage.php'; ?>
         <div class="card-body" >
             <h4 class="card-title">All Friends of the Band</h4>
-            <div style="display: initial;" data-placement="right" title="Add a Member" data-toggle="tooltip"><button data-toggle="modal" data-target="#AddCutter" type="button"  class="btn btn-inverse-primary btn-fw"><i  class="fa fa-plus"></i></button></div> 
+            <div style="display: initial;" data-placement="right" title="Add Friend" data-toggle="tooltip"><button data-toggle="modal" data-target="#AddCutter" type="button"  class="btn btn-inverse-primary btn-fw"><i  class="fa fa-plus"></i></button></div> 
 
             <!-- Modal Add Customer-->
             <div class="modal fade "   id="AddCutter"  tabindex="-1" role="dialog"
@@ -24,7 +24,7 @@ include '../Common/leftmenu.php';
                         </button>
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-md-4 d-sm-flex align-items-end round-corners-center" style="background-image: url('../Common/assets/modal-x/img/friend.png')">
+                                <div class="col-md-4 d-sm-flex align-items-end round-corners-center" style="background-image: url('../Common/assets/modal-x/img/band.jpg')">
                                     <div style="display:block;height:200px;"></div>
                                 </div>
 

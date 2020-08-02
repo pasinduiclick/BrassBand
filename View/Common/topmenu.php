@@ -8,7 +8,7 @@
                                                                                 /* height: 34px; */
                                                                                 margin: 10px;
                                                                                 vertical-align: middle;" src="../../View/Common/assets/images/logo-black.png" class="mr-2" alt="logo"/></a>
-                <a class="navbar-brand brand-logo-mini" href="index.html">IM</a>
+                <a class="navbar-brand brand-logo-mini" href="index.html"><img style="width: 50px  !important;height:auto !important;" src="../../View/Common/assets/images/logo-black.png" alt="logo"></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">

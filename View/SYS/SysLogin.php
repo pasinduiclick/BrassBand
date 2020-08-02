@@ -2,7 +2,7 @@
 <body class="sidebar-dark">
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
-            <div class="content-wrapper d-flex align-items-center auth px-0">
+            <div class="content-wrapper d-flex align-items-center auth px-0 login-bbg">
                 <div class="row w-100 mx-0">
                     <div class="col-lg-4 mx-auto">
                         <?php include '../Common/showMessage.php'; ?>
@@ -10,7 +10,7 @@
                             <div style="text-align: center;" class="brand-logo">
                                 <img src="../Common/assets/images/logo.png" width="100" alt="logo">
                             </div>
-                            <h4 class="text-center" >Members Management Panel</h4>
+                            <h4 class="text-center" >Band Asset Manager (BAM)</h4>
                             <h6 class="font-weight-light text-center">Sign in to continue.</h6>
                             <form method="POST" action="../../Service/UserService.php" class="pt-3 cmxform" id="commentForm">
                                 <div class="form-group">

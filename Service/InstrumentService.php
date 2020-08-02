@@ -45,7 +45,7 @@ if ($serviceFlag == "ADDNEWINS") {
     $marching_strap = $clib->input("marching_strap");
     $created = $databaseConnection->getTransactionDate();
 
-    $sqlQuery = "INSERT INTO Instruments (type,make,model,serial,euphonium,mouthpiece,lyre,cases,marching_strap,status,created) VALUES('$type','$make','$model','$serial','$euphonium','$mouthpiece','$lyre','$cases','$marching_strap','1','$created')";
+    $sqlQuery = "INSERT INTO instruments (type,make,model,serial,euphonium,mouthpiece,lyre,cases,marching_strap,status,created) VALUES('$type','$make','$model','$serial','$euphonium','$mouthpiece','$lyre','$cases','$marching_strap','1','$created')";
     $result = $databaseConnection->executeQuery($sqlQuery, $name . " New Instrument added " . $serviceFlag);
     $clib->add_flash_msg(Messages::$dataSaveSuccessMsg, CommonLib::MSG_OK);
     header("Location:../View/SYS/Instruments.php");
@@ -65,7 +65,7 @@ if ($serviceFlag == "EDITINS") {
     $cases = $clib->input("cases");
     $marching_strap = $clib->input("marching_strap");
 
-    $sqlQuery = "UPDATE Instruments SET type='$type',make='$make',model='$model',serial='$serial',euphonium='$euphonium',mouthpiece='$mouthpiece',lyre='$lyre',cases='$cases',marching_strap='$marching_strap' WHERE ins_id='$ins_id'";
+    $sqlQuery = "UPDATE instruments SET type='$type',make='$make',model='$model',serial='$serial',euphonium='$euphonium',mouthpiece='$mouthpiece',lyre='$lyre',cases='$cases',marching_strap='$marching_strap' WHERE ins_id='$ins_id'";
     $result = $databaseConnection->executeQuery($sqlQuery, $model . " Update Instrument details " . $serviceFlag);
     $clib->add_flash_msg(Messages::$dataUpdateSuccessMsg, CommonLib::MSG_OK);
     header("Location:../View/SYS/Instruments.php");
@@ -74,7 +74,7 @@ if ($serviceFlag == "EDITINS") {
 //Delete Instruments
 if ($serviceFlag == "DELINS") {
     $ins_id = $clib->input("ins_id");
-    $result = $databaseConnection->executeQuery("UPDATE Instruments SET status='0' WHERE ins_id='$ins_id'", $ins_id . " Instrument Deleted! " . $serviceFlag);
+    $result = $databaseConnection->executeQuery("UPDATE instruments SET status='0' WHERE ins_id='$ins_id'", $ins_id . " Instrument Deleted! " . $serviceFlag);
     $clib->add_flash_msg(Messages::$dataDeleteSuccessMsg, CommonLib::MSG_OK);
     header("Location:../View/SYS/Instruments.php");
 }

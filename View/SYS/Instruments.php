@@ -24,7 +24,7 @@ include '../Common/leftmenu.php';
                         </button>
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-md-4 d-sm-flex align-items-end round-corners-center" style="background-image: url('../Common/assets/modal-x/img/instrument.png')">
+                                <div class="col-md-4 d-sm-flex align-items-end round-corners-center" style="background-image: url('../Common/assets/modal-x/img/instrument.jpg')">
                                     <div style="display:block;height:200px;"></div>
                                 </div>
 
@@ -35,34 +35,43 @@ include '../Common/leftmenu.php';
                                         <div class="form-row">
                                             <div class="form-group col-md-6 icon_input_container">
                                                 <label for="type">Type</label>
-                                                <input id="type" type="text" name="type" class="form-control" required >
+                                                <select  id="type" name="type" class="form-control" required>
+                                                    <option value="">Please Select</option>
+                                                    <?php
+                                                    $query1 = "SELECT * from instype where status=1";
+                                                    $result1 = $databaseConnection->openConnection()->query($query1);
+                                                    while ($row1 = $result1->fetch_assoc()) {
+                                                        echo '<option value="' . $row1['instype'] . '">' . $row1['instype'] . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="make">Make</label>
-                                                <input id="make" type="text" name="make" class="form-control" required >
+                                                <input id="make" type="text" name="make" class="form-control" />
                                             </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="model">Model</label>
-                                                <input id="model" type="text" name="model" class="form-control" required >
+                                                <input id="model" type="text" name="model" class="form-control" />
                                             </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="serial">Serial</label>
-                                                <input id="serial" type="text" name="serial" class="form-control" required >
+                                                <input id="serial" type="text" name="serial" class="form-control" />
                                             </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="euphonium">Euphonium</label>
-                                                <input id="euphonium" type="text" name="euphonium" class="form-control" required >
+                                                <input id="euphonium" type="checkbox" name="euphonium" class="form-control" value="YES" >
                                             </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="mouthpiece">Mouthpiece</label>
-                                                <input id="mouthpiece" type="text" name="mouthpiece" class="form-control" required >
+                                                <input id="mouthpiece" type="checkbox" name="mouthpiece" class="form-control" value="YES" />
                                             </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="lyre">Lyre</label>
-                                                <input id="lyre" type="text" name="lyre" class="form-control" required >
+                                                <input id="lyre" type="checkbox" name="lyre" class="form-control" value="YES" />
                                             </div><div class="form-group col-md-6 icon_input_container">
-                                                <label for="cases">Cases</label>
-                                                <input id="cases" type="text" name="cases" class="form-control" required >
+                                                <label for="cases">Case</label>
+                                                <input id="cases" type="checkbox" name="cases" class="form-control" value="YES" />
                                             </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="marching_strap">Marching_strap</label>
-                                                <input id="marching_strap" type="text" name="marching_strap" class="form-control" required >
+                                                <input id="marching_strap" type="checkbox" name="marching_strap" value="YES" class="form-control" />
                                             </div>
                                         </div>
-                                        <button type="submit" class="modal-x-btn" name="serviceFlag" id="serviceFlag" value="ADDNEWINS">ADD MEMBER</button>
+                                        <button type="submit" class="modal-x-btn" name="serviceFlag" id="serviceFlag" value="ADDNEWINS">ADD INSTRUMENT</button>
 
                                         <?php echo $clib->get_csrf_token(); ?>
                                     </form>
@@ -79,7 +88,7 @@ include '../Common/leftmenu.php';
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <table id="IDM" class="table">
+                        <table id="IDM" class="table datatable">
                             <thead>
                                 <tr>
                                     <th>Type</th>
@@ -114,7 +123,7 @@ include '../Common/leftmenu.php';
                 </button>
                <div class="container-fluid">
                    <div class="row">
-                       <div class="col-md-4 d-sm-flex align-items-end round-corners-center" style="background-image: url(../Common/assets/modal-x/img/instrument.png)">
+                       <div class="col-md-4 d-sm-flex align-items-end round-corners-center" style="background-image: url(../Common/assets/modal-x/img/instrument.jpg)">
                           <div style="display:block;height:200px;"></div>
                        </div>
                       
@@ -136,21 +145,41 @@ include '../Common/leftmenu.php';
                                                 <label for="serial">Serial</label>
                                                 <input id="serial" value="' . $row['serial'] . '" type="text" name="serial" class="form-control" required >
                                             </div><div class="form-group col-md-6 icon_input_container">
-                                                <label for="euphonium">Euphonium</label>
-                                                <input id="euphonium" value="' . $row['euphonium'] . '" type="text" name="euphonium" class="form-control" required >
-                                            </div><div class="form-group col-md-6 icon_input_container">
-                                                <label for="mouthpiece">Mouthpiece</label>
-                                                <input id="mouthpiece" value="' . $row['mouthpiece'] . '" type="text" name="mouthpiece" class="form-control" required >
-                                            </div><div class="form-group col-md-6 icon_input_container">
-                                                <label for="lyre">Lyre</label>
-                                                <input id="lyre" value="' . $row['lyre'] . '" type="text" name="lyre" class="form-control" required >
-                                            </div><div class="form-group col-md-6 icon_input_container">
-                                                <label for="cases">Cases</label>
-                                                <input id="cases" value="' . $row['cases'] . '" type="text" name="cases" class="form-control" required >
-                                            </div><div class="form-group col-md-6 icon_input_container">
-                                                <label for="marching_strap">Marching_strap</label>
-                                                <input id="marching_strap" value="' . $row['marching_strap'] . '" type="text" name="marching_strap" class="form-control" required >
-                                            </div>
+                                                <label for="euphonium">Euphonium</label>';
+                                    if ($row['euphonium'] == "YES") {
+                                        echo '<input id="euphonium" type="checkbox" name="euphonium" class="form-control" value="YES" checked/>';
+                                    } else {
+                                        echo '<input id="euphonium" type="checkbox" name="euphonium" class="form-control" value="YES" />';
+                                    }
+                                    echo '</div><div class="form-group col-md-6 icon_input_container">
+                                                <label for="mouthpiece">Mouthpiece</label>';
+                                    if ($row['mouthpiece'] == "YES") {
+                                        echo '<input id="mouthpiece" type="checkbox" name="mouthpiece" class="form-control" value="YES" checked/>';
+                                    } else {
+                                        echo '<input id="mouthpiece" type="checkbox" name="mouthpiece" class="form-control" value="YES" />';
+                                    }
+                                    echo '</div><div class="form-group col-md-6 icon_input_container">
+                                                <label for="lyre">Lyre</label>';
+                                    if ($row['lyre'] == "YES") {
+                                        echo '<input id="lyre" type="checkbox" name="lyre" class="form-control" value="YES" checked/>';
+                                    } else {
+                                        echo '<input id="lyre" type="checkbox" name="lyre" class="form-control" value="YES" />';
+                                    }
+                                    echo '</div><div class="form-group col-md-6 icon_input_container">
+                                                <label for="cases">Case</label>';
+                                    if ($row['cases'] == "YES") {
+                                        echo '<input id="cases" type="checkbox" name="cases" class="form-control" value="YES" checked/>';
+                                    } else {
+                                        echo '<input id="cases" type="checkbox" name="cases" class="form-control" value="YES" />';
+                                    }
+                                    echo '</div><div class="form-group col-md-6 icon_input_container">
+                                                <label for="marching_strap">Marching_strap</label>';
+                                    if ($row['marching_strap'] == "YES") {
+                                        echo '<input id="marching_strap" type="checkbox" name="marching_strap" class="form-control" value="YES" checked/>';
+                                    } else {
+                                        echo '<input id="marching_strap" type="checkbox" name="marching_strap" class="form-control" value="YES" />';
+                                    }
+                                    echo '</div>
                                         </div>
                                         <input id="mem_id" type="hidden" name="ins_id" value="' . $row['ins_id'] . '" />
                                             <div class="modal-footer">

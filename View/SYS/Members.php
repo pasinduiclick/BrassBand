@@ -24,7 +24,7 @@ include '../Common/leftmenu.php';
                         </button>
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-md-4 d-sm-flex align-items-end round-corners-center" style="background-image: url('../Common/assets/modal-x/img/member.png')">
+                                <div class="col-md-4 d-sm-flex align-items-end round-corners-center" style="background-image: url('../Common/assets/modal-x/img/member.jpg')">
                                     <div style="display:block;height:200px;"></div>
                                 </div>
 
@@ -33,31 +33,44 @@ include '../Common/leftmenu.php';
 
                                     <form class="cmxform" id="commentForm" method="post" enctype="multipart/form-data" action="../../Service/MemberService.php">
                                         <div class="form-row">
-                                            <div class="form-group col-md-12 icon_input_container">
+                                            <div class="form-group col-md-6 icon_input_container">
                                                 <label for="name">Name</label>
                                                 <input id="name" type="text" name="name" class="form-control" required >
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="email">Email</label>
                                                 <input id="email" type="email" name="email" class="form-control" required >
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div>
+                                            </div>
+                                            
+                                             <div class="form-row">
+                                            <div class="form-group col-md-6 icon_input_container">
                                                 <label for="address">Address</label>
                                                 <input id="address" type="text" name="address" class="form-control" required >
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="phone">Phone</label>
                                                 <input id="phone" type="text" name="phone" class="form-control" required >
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div></div>
+                                            
+                                            <div class="form-row">
+                                            <div class="form-group col-md-6 icon_input_container">
                                                 <label for="parents_name">Parents name</label>
                                                 <input id="parents_name" type="text" name="parents_name" class="form-control"  >
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="parents_email">Parents email</label>
                                                 <input id="parents_email" type="email" name="parents_email" class="form-control"  >
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div></div>
+                                            
+                                            <div class="form-row">
+                                            <div class="form-group col-md-6 icon_input_container">
                                                 <label for="parents_phone">Parents phone</label>
                                                 <input id="parents_phone" type="text" name="parents_phone" class="form-control"  >
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="parents_mobile">Parents mobile</label>
                                                 <input id="parents_mobile" type="text" name="parents_mobile" class="form-control"  >
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div></div>
+                                            
+                                            <div class="form-row">
+                                            <div class="form-group col-md-6 icon_input_container">
                                                 <label for="membership_type">Membership type</label>
                                                 <select name="membership_type"  class="form-control" required>
                                                     <option value="">--Please Select--</option>
@@ -67,7 +80,7 @@ include '../Common/leftmenu.php';
                                                 </select>
 
                                             </div>
-                                            <div class="form-group col-md-12 icon_input_container">
+                                            <div class="form-group col-md-6 icon_input_container">
                                                 <label for="membership_category">Membership Category</label>
                                                 <select name="membership_category"  class="form-control" required>
                                                     <option value="">--Please Select--</option>
@@ -77,10 +90,13 @@ include '../Common/leftmenu.php';
                                                     <option value="First Class Brass">First Class Brass</option>
                                                 </select>
 
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div></div>
+                                            
+                                            <div class="form-row">
+                                            <div class="form-group col-md-6 icon_input_container">
                                                 <label for="date_joined">Date joined</label>
                                                 <input id="date_joined" type="date" name="date_joined" class="form-control" required >
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="date_left">Date left</label>
                                                 <input id="date_left" type="date" name="date_left" class="form-control"  >
                                             </div>
@@ -102,7 +118,7 @@ include '../Common/leftmenu.php';
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <table id="IDM" class="table">
+                        <table id="IDM" class="table datatable">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -141,7 +157,7 @@ include '../Common/leftmenu.php';
                 </button>
                <div class="container-fluid">
                    <div class="row">
-                       <div class="col-md-4 d-sm-flex align-items-end round-corners-center" style="background-image: url(../Common/assets/modal-x/img/member.png)">
+                       <div class="col-md-4 d-sm-flex align-items-end round-corners-center" style="background-image: url(../Common/assets/modal-x/img/member.jpg)">
                           <div style="display:block;height:200px;"></div>
                        </div>
                       
@@ -153,28 +169,28 @@ include '../Common/leftmenu.php';
                                             <div class="form-group col-md-12 icon_input_container">
                                                 <label for="name">Name</label>
                                                 <input id="name" type="text" name="name" class="form-control" required value="'.$row['name'].'" />
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="email">Email</label>
                                                 <input id="email" type="email" name="email" class="form-control" required value="'.$row['email'].'" />
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="address">Address</label>
                                                 <input id="address" type="text" name="address" class="form-control" required value="'.$row['address'].'" />
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="phone">Phone</label>
                                                 <input id="phone" type="text" name="phone" class="form-control" required value="'.$row['phone'].'" />
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="parents_name">Parents name</label>
                                                 <input id="parents_name" type="text" name="parents_name" class="form-control"  value="'.$row['parents_name'].'" />
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="parents_email">Parents email</label>
                                                 <input id="parents_email" type="email" name="parents_email" class="form-control" value="'.$row['parents_email'].'" />
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="parents_phone">Parents phone</label>
                                                 <input id="parents_phone" type="text" name="parents_phone" class="form-control" value="'.$row['parents_phone'].'" />
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="parents_mobile">Parents mobile</label>
                                                 <input id="parents_mobile" type="text" name="parents_mobile" class="form-control" value="'.$row['parents_mobile'].'" />
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="membership_type">Membership type</label>
                                                 <select name="membership_type"  class="form-control" required>
                                                     <option value="'.$row['membership_type'].'">'.$row['membership_type'].'</option>
@@ -185,7 +201,7 @@ include '../Common/leftmenu.php';
                                                 </select>
 
                                             </div>
-                                            <div class="form-group col-md-12 icon_input_container">
+                                            <div class="form-group col-md-6 icon_input_container">
                                                 <label for="membership_category">Membership Category</label>
                                                 <select name="membership_category"  class="form-control" required>
                                                     <option value="'.$row['membership_category'].'">'.$row['membership_category'].'</option>
@@ -196,7 +212,7 @@ include '../Common/leftmenu.php';
                                                     <option value="First Class Brass">First Class Brass</option>
                                                 </select>
 
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                            </div><div class="form-group col-md-6 icon_input_container">
                                                 <label for="date_joined">Date joined</label>
                                                 <input id="date_joined" type="date" name="date_joined" class="form-control" required value="'.substr($row['date_joined'],0,10).'" />
                                             </div><div class="form-group col-md-12 icon_input_container">

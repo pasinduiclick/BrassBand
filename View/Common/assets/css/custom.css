@@ -5,10 +5,31 @@
     font-family: 'themify' !important;
 }
 
- a,h1, h2, h3, h3, h4, h5, h6 {
+.login-bbg{
+    background-image: url(../images/brass.jpg) !important;
+    background-size: cover !important;
+    background-position: bottom !important;
+}
+
+ a,h1, h2, h3, h3, h4, h5, h6, span.inner-modal-title, label {
     font-family: 'PT Sans', sans-serif !important;
 }
 
+img.mr-2 {
+    width: 100px !important;
+}
+
+.card .card-title {
+    color: #000000 !important;
+    font-size: 27px !important;
+    font-weight:700 !important;
+}
+
+span.inner-modal-title{
+    color: #000000 !important;
+    font-size: 27px !important;
+    font-weight:700 !important;
+}
 
 /* buttons */
 

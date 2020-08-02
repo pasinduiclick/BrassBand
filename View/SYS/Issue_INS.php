@@ -50,7 +50,7 @@ include '../Common/leftmenu.php';
                                 </div>                                    
                             </div>
 
-                            <table id="IDM" class="table">
+                            <table id="IDM" class="table datatable">
                                 <thead>
                                     <tr>
                                         <th>Type</th>

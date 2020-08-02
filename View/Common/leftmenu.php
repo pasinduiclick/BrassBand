@@ -18,14 +18,14 @@
             <li class="nav-item">
                 <a class="nav-link" href="../SYS/Issue_INS.php">
                     <i class="ti-agenda menu-icon"></i>
-                    <span class="menu-title">ISSUE Instruments</span>
+                    <span class="menu-title">Issue Instruments</span>
                 </a>
             </li>
             
              <li class="nav-item">
                  <a class="nav-link" href="../SYS/Issue_UNI.php">
                     <i class="ti-agenda menu-icon"></i>
-                    <span class="menu-title">ISSUE Uniforms</span>
+                    <span class="menu-title">Issue Uniforms</span>
                 </a>
             </li>
             
@@ -44,7 +44,7 @@
 
             <li class="nav-item">
                 <a class="nav-link" href="../SYS/Instruments.php">
-                    <i class="ti-bag menu-icon"></i>
+                    <i class="ti-panel menu-icon"></i>
                     <span class="menu-title">Instruments</span>
                 </a>
             </li> 
@@ -71,8 +71,14 @@
             
             <li class="nav-item">
                 <a class="nav-link" href="../SYS/emailConfig.php">
-                    <i class="ti-user menu-icon"></i>
+                    <i class="ti-email menu-icon"></i>
                     <span class="menu-title">System Email</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../SYS/MasterData.php">
+                    <i class="ti-alert menu-icon"></i>
+                    <span class="menu-title">Master Data</span>
                 </a>
             </li>
         </ul>

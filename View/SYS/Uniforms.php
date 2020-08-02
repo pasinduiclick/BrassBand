@@ -35,7 +35,16 @@ include '../Common/leftmenu.php';
                                         <div class="form-row">
                                             <div class="form-group col-md-12 icon_input_container">
                                                 <label for="type">Type</label>
-                                                <input id="type" type="text" name="type" class="form-control" required >
+                                                <select  id="type" name="type" class="form-control" required>
+                                                    <option value="">Please Select</option>
+                                                    <?php
+                                                    $query1 = "SELECT * from unicat where status=1";
+                                                    $result1 = $databaseConnection->openConnection()->query($query1);
+                                                    while ($row1 = $result1->fetch_assoc()) {
+                                                        echo '<option value="' . $row1['type'] . '">' . $row1['type'] . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div><div class="form-group col-md-12 icon_input_container">
                                                 <label for="sizes">Sizes</label>
                                                 <input id="sizes" type="text" name="sizes" class="form-control" required >
@@ -61,7 +70,7 @@ include '../Common/leftmenu.php';
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <table id="IDM" class="table">
+                        <table id="IDM" class="table datatable">
                             <thead>
                                 <tr>
                                     <th>Type</th>
@@ -104,9 +113,16 @@ include '../Common/leftmenu.php';
                              <form class="cmxform" id="commentForm" method="post" enctype="multipart/form-data" action="../../Service/UniformService.php">
                                         <div class="form-row">
                                             <div class="form-group col-md-12 icon_input_container">
-                                                <label for="type">Type</label>
-                                                <input id="type" value="' . $row['type'] . '" type="text" name="type" class="form-control" required >
-                                            </div><div class="form-group col-md-12 icon_input_container">
+                                                <label for="type">Type</label>';
+                                    echo '<select  id="type" name="type" class="form-control" required>';
+                                    echo '<option value="' . $row['type'] . '">' . $row['type'] . '</option>';
+                                    $query1 = "SELECT * from unicat where status=1";
+                                    $result1 = $databaseConnection->openConnection()->query($query1);
+                                    while ($row1 = $result1->fetch_assoc()) {
+                                        echo '<option value="' . $row1['type'] . '">' . $row1['type'] . '</option>';
+                                    }
+
+                                    echo '</select></div><div class="form-group col-md-12 icon_input_container">
                                                 <label for="sizes">Sizes</label>
                                                 <input id="sizes" value="' . $row['sizes'] . '" type="text" name="sizes" class="form-control" required >
                                             </div><div class="form-group col-md-12 icon_input_container">

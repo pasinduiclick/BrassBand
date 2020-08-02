@@ -89,7 +89,7 @@ if ($serviceFlag == "INSRETURN") {
     $ref_number = $clib->input("ref_number");
     $result = $databaseConnection->executeQuery("UPDATE issue_ins SET status='2' WHERE ref_number='$ref_number'", $ref_number . " Instrument returned " . $serviceFlag);
     $result1 = $databaseConnection->executeQuery("UPDATE notifications SET status='0' WHERE ref_number='$ref_number'", $ref_number . " Notification Cleared " . $serviceFlag);
-    $clib->add_flash_msg(Messages::$dataDeleteSuccessMsg, CommonLib::MSG_OK);
+    $clib->add_flash_msg(Messages::$dataSaveSuccessMsg, CommonLib::MSG_OK);
     header("Location:../View/SYS/Issue_INS.php");
 }
 
@@ -98,8 +98,8 @@ if ($serviceFlag == "UNIRETURN") {
     $ref_number = $clib->input("ref_number");
     $result = $databaseConnection->executeQuery("UPDATE issue_uniform SET status='2' WHERE ref_number='$ref_number'", $ref_number . " Uniform returned " . $serviceFlag);
     $result1 = $databaseConnection->executeQuery("UPDATE notifications SET status='0' WHERE ref_number='$ref_number'", $ref_number . " Notification Cleared " . $serviceFlag);
-    $clib->add_flash_msg(Messages::$dataDeleteSuccessMsg, CommonLib::MSG_OK);
-    header("Location:../View/SYS/Issue_INS.php");
+    $clib->add_flash_msg(Messages::$dataSaveSuccessMsg, CommonLib::MSG_OK);
+    header("Location:../View/SYS/Issue_UNI.php");
 }
 
 //Clear Notification

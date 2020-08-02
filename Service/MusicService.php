@@ -41,10 +41,24 @@ if ($serviceFlag == "ADDNEWMUSIC") {
     $file_number = $clib->input("file_number");
     $created = $databaseConnection->getTransactionDate();
 
-    $sqlQuery = "INSERT INTO music (name,genre,composer,arranger,file_number,status,created) VALUES('$name','$genre','$composer','$arranger','$file_number','1','$created')";
-    $result = $databaseConnection->executeQuery($sqlQuery, $type . " New Uniform added " . $serviceFlag);
-    $clib->add_flash_msg(Messages::$dataSaveSuccessMsg, CommonLib::MSG_OK);
-    header("Location:../View/SYS/Music.php");
+    //File Upload process
+    $target_dir = "music_files/";
+    $target_file = $target_dir . basename($_FILES["music_file"]["name"]);
+    $fileExt = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    // Allow pdf file formats
+    if ($fileExt != "pdf") {
+        echo "Sorry, only PDF files are allowed.";
+        $clib->add_flash_msg("Sorry, only PDF files are allowed.", CommonLib::MSG_ERR);
+        header("Location:../View/SYS/Music.php");
+    } else {
+        $target_file = $target_dir . $file_number . ".pdf";
+        move_uploaded_file($_FILES["music_file"]["tmp_name"], $target_file);
+        $fileName = $target_file;
+        $sqlQuery = "INSERT INTO music (name,genre,composer,arranger,file_number,status,created,music_file) VALUES('$name','$genre','$composer','$arranger','$file_number','1','$created','$fileName')";
+        $result = $databaseConnection->executeQuery($sqlQuery, $name . " New Music added " . $serviceFlag);
+        $clib->add_flash_msg(Messages::$dataSaveSuccessMsg, CommonLib::MSG_OK);
+        header("Location:../View/SYS/Music.php");
+    }
 }
 
 //Update Music
@@ -57,10 +71,24 @@ if ($serviceFlag == "EDITMUSIC") {
     $arranger = $clib->input("arranger");
     $file_number = $clib->input("file_number");
 
-    $sqlQuery = "UPDATE music SET name='$name',genre='$genre',composer='$composer',arranger='$arranger',file_number='$file_number' WHERE music_id='$music_id'";
-    $result = $databaseConnection->executeQuery($sqlQuery, $name . " Update music details " . $serviceFlag);
-    $clib->add_flash_msg(Messages::$dataUpdateSuccessMsg, CommonLib::MSG_OK);
-    header("Location:../View/SYS/Music.php");
+    //File Upload process
+    $target_dir = "music_files/";
+    $target_file = $target_dir . basename($_FILES["music_file"]["name"]);
+    $fileExt = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    // Allow pdf file formats
+    if ($fileExt != "pdf") {
+        echo "Sorry, only PDF files are allowed.";
+        $clib->add_flash_msg("Sorry, only PDF files are allowed.", CommonLib::MSG_ERR);
+        header("Location:../View/SYS/Music.php");
+    } else {
+        $target_file = $target_dir . $file_number . ".pdf";
+        move_uploaded_file($_FILES["music_file"]["tmp_name"], $target_file);
+        $fileName = $target_file;
+        $sqlQuery = "UPDATE music SET name='$name',genre='$genre',composer='$composer',arranger='$arranger',file_number='$file_number',music_file='$fileName' WHERE music_id='$music_id'";
+        $result = $databaseConnection->executeQuery($sqlQuery, $name . " Update music details " . $serviceFlag);
+        $clib->add_flash_msg(Messages::$dataUpdateSuccessMsg, CommonLib::MSG_OK);
+        header("Location:../View/SYS/Music.php");
+    }
 }
 
 //Delete Music
