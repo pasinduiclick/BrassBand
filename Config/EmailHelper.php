@@ -5,9 +5,9 @@
   | -------------------------------------------------------------------------
   | This Helper library lets you to create Email Functionalities.
  * 
- * @package     identimark
- * @author      THILAN PATHIRAGE
- * @version     0.1
+ * @package     brassband
+ * @author      PASINDU SIRIWARDANA
+ * @version     1.0
  * @copyright (c) 2020, ICLICK ONLINE TECHNOLOGIES
  */
 

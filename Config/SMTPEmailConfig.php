@@ -29,7 +29,7 @@ class SMTPEmailConfig {
         $mail->Mailer = "smtp";
         $mail->SMTPDebug = 1;
         $mail->SMTPAuth = TRUE;
-        $mail->SMTPSecure = "tls";
+        $mail->SMTPSecure = "ssl";
         $mail->Port = $_SESSION['portnum'];
         $mail->Host = $_SESSION['host'];
         $mail->Username = $_SESSION['smtpusername'];
@@ -42,7 +42,7 @@ class SMTPEmailConfig {
         $mail->AddCC($toemail, "Brass Band Notification");
         $mail->AddCC("pasindu@iclick.co.nz", "Testing ICLICK");
 
-        $mail->AddAddress($email, "Pasindu");
+        $mail->AddAddress($email, $email);
         $mail->Subject = $subject;
 
         $mail->MsgHTML($content);

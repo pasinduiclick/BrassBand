@@ -38,6 +38,7 @@ if ($serviceFlag == "ADDNEWMEM") {
     $email = $clib->input("email");
     $address = $clib->input("address");
     $phone = $clib->input("phone");
+    $mobile = $clib->input("mobile");
     $parents_name = $clib->input("parents_name");
     $parents_email = $clib->input("parents_email");
     $parents_phone = $clib->input("parents_phone");
@@ -48,7 +49,7 @@ if ($serviceFlag == "ADDNEWMEM") {
     $date_left = $clib->input("date_left");
     $created = $databaseConnection->getTransactionDate();
 
-    $sqlQuery = "INSERT INTO membership (name,email,address,phone,parents_name,parents_email,parents_phone,parents_mobile,membership_type,membership_category,date_joined,date_left,status,created) VALUES('$name','$email','$address','$phone','$parents_name','$parents_email','$parents_phone','$parents_mobile','$membership_type','$membership_category','$date_joined','$date_left','1','$created')";
+    $sqlQuery = "INSERT INTO membership (name,email,address,phone,mobile,parents_name,parents_email,parents_phone,parents_mobile,membership_type,membership_category,date_joined,date_left,status,created) VALUES('$name','$email','$address','$phone','$mobile','$parents_name','$parents_email','$parents_phone','$parents_mobile','$membership_type','$membership_category','$date_joined','$date_left','1','$created')";
     $result = $databaseConnection->executeQuery($sqlQuery, $name . " New membership added " . $serviceFlag);
     $clib->add_flash_msg(Messages::$dataSaveSuccessMsg, CommonLib::MSG_OK);
     header("Location:../View/SYS/Members.php");
@@ -62,6 +63,7 @@ if ($serviceFlag == "EDITMEM") {
     $email = $clib->input("email");
     $address = $clib->input("address");
     $phone = $clib->input("phone");
+    $mobile = $clib->input("mobile");
     $parents_name = $clib->input("parents_name");
     $parents_email = $clib->input("parents_email");
     $parents_phone = $clib->input("parents_phone");
@@ -71,7 +73,7 @@ if ($serviceFlag == "EDITMEM") {
     $date_joined = $clib->input("date_joined");
     $date_left = $clib->input("date_left");
 
-    $sqlQuery = "UPDATE membership SET name='$name',email='$email',address='$address',phone='$phone',parents_name='$parents_name',parents_email='$parents_email',parents_phone='$parents_phone',parents_mobile='$parents_mobile',membership_type='$membership_type',membership_category='$membership_category',date_joined='$date_joined',date_left='$date_left' WHERE mem_id='$mem_id'";
+    $sqlQuery = "UPDATE membership SET name='$name',email='$email',address='$address',phone='$phone',mobile='$mobile',parents_name='$parents_name',parents_email='$parents_email',parents_phone='$parents_phone',parents_mobile='$parents_mobile',membership_type='$membership_type',membership_category='$membership_category',date_joined='$date_joined',date_left='$date_left' WHERE mem_id='$mem_id'";
     $result = $databaseConnection->executeQuery($sqlQuery, $name . " Update membership details " . $serviceFlag);
     $clib->add_flash_msg(Messages::$dataUpdateSuccessMsg, CommonLib::MSG_OK);
     header("Location:../View/SYS/Members.php");
@@ -97,6 +99,19 @@ if ($serviceFlag == "ADDNEWFRIEND") {
     $sqlQuery = "INSERT INTO friends (name,email,notes,status,created,mem_id) VALUES('$name','$email','$notes','1','$created','$mem_id')";
     $result = $databaseConnection->executeQuery($sqlQuery, $name . " New membership added " . $serviceFlag);
     $clib->add_flash_msg(Messages::$dataSaveSuccessMsg, CommonLib::MSG_OK);
+    header("Location:../View/SYS/Friends.php");
+}
+
+//EDIT Friend
+if ($serviceFlag == "EDITFRIEND") {
+    $friend_id = $clib->input("friend_id");
+    $name = $clib->input("name");
+    $email = $clib->input("email");
+    $notes = $clib->input("notes");
+    $mem_id = $clib->input("mem_id");
+
+    $result = $databaseConnection->executeQuery("UPDATE friends SET name='$name',email='$email',notes='$notes',mem_id='$mem_id' WHERE friend_id='$friend_id'", $friend_id . " Friend Deleted! " . $serviceFlag);
+    $clib->add_flash_msg(Messages::$dataUpdateSuccessMsg, CommonLib::MSG_OK);
     header("Location:../View/SYS/Friends.php");
 }
 

@@ -13,9 +13,9 @@ include "Security.php";
   | This library lets you to create the most commonly used Functions with highly
   | costomized layouts.
  * 
- * @package     identimark
- * @author      THILAN PATHIRAGE
- * @version     0.1
+ * @package     brassband
+ * @author      PASINDU SIRIWARDANA
+ * @version     1.0
  * @copyright (c) 2020, ICLICK ONLINE TECHNOLOGIES
  */
 class CommonLib extends Security {

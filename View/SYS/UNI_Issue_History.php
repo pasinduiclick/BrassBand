@@ -26,7 +26,6 @@ $mem_id = $_GET['mem_id'];
                                     <th>ID Mark</th> 
                                     <th>Issue Date</th>
                                     <th>Return Date</th>
-                                    <th>Quantity</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -43,7 +42,6 @@ $mem_id = $_GET['mem_id'];
                                     '<td>' . $row['id_marking'] . '</td>'
                                     . '<td>' . $row['issue_date'] . '</td>'
                                     . '<td>' . $row['return_date'] . '</td>'
-                                    . '<td>' . $row['qty'] . '</td>'
                                     . '<td><div class="btn-group" role="group" aria-label="Basic example">';
                                     if ($row['SS'] == 1) {
                                         echo '<button class="btn btn-sm btn-inverse-danger btn-fw" data-placement="right" title="Item Returned" data-toggle="tooltip"  onclick="return showSwal(' . "'warning-message-and-cancel','../../Service/IssueService.php?serviceFlag=UNIRETURN&ref_number=" . $row['ref_number'] . "&csrf_token=" . $clib->get_csrf_token(true) . "'" . ')"><i class="fa fa-archive"></i></button>';

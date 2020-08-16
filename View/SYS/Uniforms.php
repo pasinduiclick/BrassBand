@@ -11,9 +11,12 @@ include '../Common/leftmenu.php';
     <div class="card" >
         <?php include '../Common/showMessage.php'; ?>
         <div class="card-body" >
-            <h4 class="card-title">All Uniforms</h4>
-            <div style="display: initial;" data-placement="right" title="Add a Member" data-toggle="tooltip"><button data-toggle="modal" data-target="#AddCutter" type="button"  class="btn btn-inverse-primary btn-fw"><i  class="fa fa-plus"></i></button></div> 
-
+            <h4 class="card-title">All Uniforms</h4>            
+            <?php
+            if ($_SESSION['user_type'] == 1) {
+                echo '<div style="display: initial;" data-placement="right" title="Add a Member" data-toggle="tooltip"><button data-toggle="modal" data-target="#AddCutter" type="button"  class="btn btn-inverse-primary btn-fw"><i  class="fa fa-plus"></i></button></div>';
+            }
+            ?>
             <!-- Modal Add Customer-->
             <div class="modal fade "   id="AddCutter"  tabindex="-1" role="dialog"
                  aria-labelledby="AddMemberModel" aria-hidden="true">
@@ -41,7 +44,7 @@ include '../Common/leftmenu.php';
                                                     $query1 = "SELECT * from unicat where status=1";
                                                     $result1 = $databaseConnection->openConnection()->query($query1);
                                                     while ($row1 = $result1->fetch_assoc()) {
-                                                        echo '<option value="' . $row1['type'] . '">' . $row1['type'] . '</option>';
+                                                        echo '<option value="' . $row1['category_name'].' - '.$row1['type'] . '">' . $row1['category_name'] . ' - ' . $row1['type'] . '</option>';
                                                     }
                                                     ?>
                                                 </select>
@@ -75,8 +78,12 @@ include '../Common/leftmenu.php';
                                 <tr>
                                     <th>Type</th>
                                     <th>Sizes</th>
-                                    <th>ID Mark</th>                                  
-                                    <th>Action</th>
+                                    <th>ID Mark</th>
+                                    <?php
+                                    if ($_SESSION['user_type'] == 1) {
+                                        echo '<th>Action</th>';
+                                    }
+                                    ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -87,12 +94,13 @@ include '../Common/leftmenu.php';
                                     echo '<tr>
                                                         <td>' . $row['type'] . '</td>
                                                        <td>' . $row['sizes'] . '</td>'
-                                    . '<td>' . $row['id_marking'] . '</td>'
-                                    . '<td><div class="btn-group" role="group" aria-label="Basic example">
-                                                            <div style="display: initial;" data-placement="left" title="View & Edit Cutter" data-toggle="tooltip"><button type="button" data-toggle="modal" data-target="#updtaccmodal' . $row['uniform_id'] . '" class="btn btn-sm btn-inverse-primary btn-fw"><i class="fa fa-pencil"></i></button></div>
-                                                            <button class="btn btn-sm btn-inverse-danger btn-fw" data-placement="right" title="Delete Cutter" data-toggle="tooltip"  onclick="return showSwal(' . "'warning-message-and-cancel','../../Service/UniformService.php?serviceFlag=DELUNI&uniform_id=" . $row['uniform_id'] . "&csrf_token=" . $clib->get_csrf_token(true) . "'" . ')"><i class="fa fa-trash"></i></button>  
+                                    . '<td>' . $row['id_marking'] . '</td>';
+                                    if ($_SESSION['user_type'] == 1) {
+                                        echo '<td><div class="btn-group" role="group" aria-label="Basic example">
+                                                            <div style="display: initial;" data-placement="left" title="View & Edit Uniform" data-toggle="tooltip"><button type="button" data-toggle="modal" data-target="#updtaccmodal' . $row['uniform_id'] . '" class="btn btn-sm btn-inverse-primary btn-fw"><i class="fa fa-pencil"></i></button></div>
+                                                            <button class="btn btn-sm btn-inverse-danger btn-fw" data-placement="right" title="Delete Uniform" data-toggle="tooltip"  onclick="return showSwal(' . "'warning-message-and-cancel','../../Service/UniformService.php?serviceFlag=DELUNI&uniform_id=" . $row['uniform_id'] . "&csrf_token=" . $clib->get_csrf_token(true) . "'" . ')"><i class="fa fa-trash"></i></button>  
                                                         </div>';
-
+                                    }
                                     echo '<!-- Modal Edit Uniform-->
     <div class="modal fade "  id="updtaccmodal' . $row['uniform_id'] . '" tabindex="-1" role="dialog"
          aria-labelledby="AddCutterModel" aria-hidden="true">
@@ -119,7 +127,7 @@ include '../Common/leftmenu.php';
                                     $query1 = "SELECT * from unicat where status=1";
                                     $result1 = $databaseConnection->openConnection()->query($query1);
                                     while ($row1 = $result1->fetch_assoc()) {
-                                        echo '<option value="' . $row1['type'] . '">' . $row1['type'] . '</option>';
+                                        echo '<option value="' . $row1['category_name'].' - '.$row1['type'] . '">' . $row1['category_name'] . ' - ' . $row1['type'] . '</option>';
                                     }
 
                                     echo '</select></div><div class="form-group col-md-12 icon_input_container">

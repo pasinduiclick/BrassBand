@@ -30,8 +30,7 @@ $ref_number = "UNI" . date("mdhi");
                                             <tr class="bg-dark text-white">
                                                 <th>Type</th>
                                                 <th>Sizes</th>
-                                                <th>ID Mark</th> 
-                                                <th>Quantity</th>
+                                                <th>ID Mark</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -54,7 +53,7 @@ $ref_number = "UNI" . date("mdhi");
                                                 <td class="text-left"><?php echo $row2["type"]; ?></td>
                                                 <td class="text-left"><?php echo $row2["sizes"]; ?></td>
                                                 <td class="text-left"><?php echo $row2["id_marking"]; ?></td>
-                                                <td><?php echo $_POST['qty'][$row2["uniform_id"]]; ?><input type="hidden" value="<?php echo $_POST['qty'][$row2["uniform_id"]]; ?>" name="qty[<?php echo $row2["uniform_id"]; ?>]"/></td>                                                                                        
+                                                <td><input type="hidden" value="<?php echo $_POST['qty'][$row2["uniform_id"]]; ?>" name="qty[<?php echo $row2["uniform_id"]; ?>]"/></td>                                                                                        
                                                 </tr>
                                                 <?php
                                             }
@@ -67,8 +66,8 @@ $ref_number = "UNI" . date("mdhi");
                                         </div>
 
                                         <div class="form-group col-md-4 icon_input_container">
-                                            <label for="name">Return Date</label>
-                                            <input id="name" type="date" name="return_date" class="form-control" required >
+                                            <label for="name">Return Date (Optional)</label>
+                                            <input id="name" type="date" name="return_date" class="form-control" >
                                         </div>
 
                                         <button type="submit" class="btn btn-inverse-primary btn-fw add-new-order-btn" name="serviceFlag" value="ISSUEUNI"><li class="fa fa-book" ></li> Submit</button>

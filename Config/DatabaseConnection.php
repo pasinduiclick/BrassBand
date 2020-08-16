@@ -6,16 +6,16 @@
  * @author PASINDU SIRIWARDANA
  */
 include 'SMTPEmailConfig.php';
+
 class DatabaseConnection {
 
     private $serverHost = "localhost";
     private $timezone = 'Pacific/Auckland';
-    
     //DEVELOPMENT ENVIRONMENT
     private $databaseName = "brassband";
     private $userName = "root";
     private $password = "";
-    
+    private $domainName = "http://iclick.website/brassband/View/SYS/";
 
     //PROD ENVIRONMENT
 //    private $databaseName = "iclick_brassband";
@@ -37,7 +37,7 @@ class DatabaseConnection {
 
     function openSMPTP() {
         $query = "SELECT * from emailconfig";
-        $result =  $this->openConnection()->query($query);
+        $result = $this->openConnection()->query($query);
         while ($row = $result->fetch_assoc()) {
             $_SESSION['portnum'] = $row['portnum'];
             $_SESSION['host'] = $row['host'];
@@ -45,6 +45,7 @@ class DatabaseConnection {
             $_SESSION['smtppasswrd'] = $row['passwrd'];
         }
     }
+
     /*
      * passing parameter as a string and open the database connection, after that
      * executing the query.
@@ -66,9 +67,9 @@ class DatabaseConnection {
 
         $connection = $this->openConnection();
         $this->openSMPTP();
-        
+
         if (!mysqli_query($connection, $sqlQuery)) {
-            $this->writeErrorLog(mysqli_error($connection));
+            //$this->writeErrorLog(mysqli_error($connection));
             echo("Error description: " . mysqli_error($connection));
             $this->createExpFile(mysqli_error($connection));
             die();
@@ -173,7 +174,7 @@ class DatabaseConnection {
         }
     }
 
-    function sendEmailNotification($ref_number,$mem_id,$return_date) {
+    function sendEmailNotification($ref_number, $mem_id, $return_date) {
 
         $databaseConnection = new DatabaseConnection();
         $databaseConnection->openConnection();
@@ -182,7 +183,8 @@ class DatabaseConnection {
         $helloName = ""; //(Inside the email template);
         $required_date = $return_date; //(Inside the email template);        
         $to = "";
-        
+        $subject = "Update from Marlborough Brass Band";
+
         $querya = "select name,email from membership WHERE mem_id='$mem_id'";
         $resulta = $databaseConnection->openConnection()->query($querya);
         if ($rowa = $resulta->fetch_assoc()) {
@@ -191,6 +193,13 @@ class DatabaseConnection {
         }
 
         $message = "Hello $helloName, You have rented items from Marlborough Brass Band. Ref Number : $ref_number";
+
+        if (substr($ref_number, 0, 3) == "INS") {
+            $message = $message . '<a href="' . $databaseConnection->domainName . '/ViewINSRentPublic.php?ref_number=' . $ref_number . '" style="padding: 10px 20px; border: 1px solid #ED2939;border-radius: 10px;font-size: 14px; color: black;font-weight:bold;display: inline-block; background-color:#33cc33">View your rented Instrument</a>';
+        } else {
+            $message = $message . '<a href="' . $databaseConnection->domainName . '/ViewUNIRentPublic.php?ref_number=' . $ref_number . '" style="padding: 10px 20px; border: 1px solid #ED2939;border-radius: 10px;font-size: 14px; color: black;font-weight:bold;display: inline-block; background-color:#33cc33">View your rented Uniform</a>';
+        }
+
 
         if ($MailHelper->openSMTP($to, $subject, $message) == 1) {
             $databaseConnection->executeQuery("update membership set status=1 where mem_id=0", $ref_number . " notification email sent to " . $to);

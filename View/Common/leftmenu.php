@@ -7,7 +7,7 @@
     <!-- partial:partials/_sidebar.html -->
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
-            
+
             <li class="nav-item">
                 <a class="nav-link" href="../SYS/Notifications.php">
                     <i class="ti-announcement menu-icon"></i>
@@ -21,14 +21,14 @@
                     <span class="menu-title">Issue Instruments</span>
                 </a>
             </li>
-            
-             <li class="nav-item">
-                 <a class="nav-link" href="../SYS/Issue_UNI.php">
+
+            <li class="nav-item">
+                <a class="nav-link" href="../SYS/Issue_UNI.php">
                     <i class="ti-agenda menu-icon"></i>
                     <span class="menu-title">Issue Uniforms</span>
                 </a>
             </li>
-            
+
             <li class="nav-item">
                 <a class="nav-link" href="../SYS/Members.php">
                     <i class="ti-id-badge menu-icon"></i>
@@ -48,7 +48,7 @@
                     <span class="menu-title">Instruments</span>
                 </a>
             </li> 
-            
+
             <li class="nav-item">
                 <a class="nav-link" href="../SYS/Uniforms.php">
                     <i class="ti-briefcase menu-icon"></i>
@@ -61,26 +61,29 @@
                     <span class="menu-title">Music</span>
                 </a>
             </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="../SYS/Users.php">
-                    <i class="ti-user menu-icon"></i>
-                    <span class="menu-title">System Users</span>
-                </a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="../SYS/emailConfig.php">
-                    <i class="ti-email menu-icon"></i>
-                    <span class="menu-title">System Email</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../SYS/MasterData.php">
-                    <i class="ti-alert menu-icon"></i>
-                    <span class="menu-title">Master Data</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <div class="main-panel">
+            <?php
+            if ($_SESSION['user_type'] == 1) {
+                echo '<li class="nav-item">
+                    <a class="nav-link" href="../SYS/Users.php">
+                        <i class="ti-user menu-icon"></i>
+                        <span class="menu-title">System Users</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../SYS/emailConfig.php">
+                        <i class="ti-email menu-icon"></i>
+                        <span class="menu-title">System Email</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../SYS/MasterData.php">
+                        <i class="ti-alert menu-icon"></i>
+                        <span class="menu-title">Master Data</span>
+                    </a>
+                </li>';
+            }
+            ?>
+                    </ul>
+                    </nav>
+                    <div class="main-panel">

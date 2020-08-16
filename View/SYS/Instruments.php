@@ -12,8 +12,11 @@ include '../Common/leftmenu.php';
         <?php include '../Common/showMessage.php'; ?>
         <div class="card-body" >
             <h4 class="card-title">All Instruments</h4>
-            <div style="display: initial;" data-placement="right" title="Add a Member" data-toggle="tooltip"><button data-toggle="modal" data-target="#AddCutter" type="button"  class="btn btn-inverse-primary btn-fw"><i  class="fa fa-plus"></i></button></div> 
-
+            <?php
+            if ($_SESSION['user_type'] == 1) {
+                echo '<div style="display: initial;" data-placement="right" title="Add a Member" data-toggle="tooltip"><button data-toggle="modal" data-target="#AddCutter" type="button"  class="btn btn-inverse-primary btn-fw"><i  class="fa fa-plus"></i></button></div> ';
+            }
+            ?>            
             <!-- Modal Add Customer-->
             <div class="modal fade "   id="AddCutter"  tabindex="-1" role="dialog"
                  aria-labelledby="AddMemberModel" aria-hidden="true">
@@ -94,8 +97,12 @@ include '../Common/leftmenu.php';
                                     <th>Type</th>
                                     <th>Make</th>
                                     <th>Model</th>
-                                    <th>Serial</th>                                   
-                                    <th>Action</th>
+                                    <th>Serial</th>
+                                    <?php
+                                     if ($_SESSION['user_type'] == 1) {
+                                         echo '<th>Action</th>';
+                                     }
+                                    ?>                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -107,12 +114,13 @@ include '../Common/leftmenu.php';
                                                         <td>' . $row['type'] . '</td>
                                                        <td>' . $row['make'] . '</td>'
                                     . '<td>' . $row['model'] . '</td>'
-                                    . '<td>' . $row['serial'] . '</td>'
-                                    . '<td><div class="btn-group" role="group" aria-label="Basic example">
-                                                            <div style="display: initial;" data-placement="left" title="View & Edit Cutter" data-toggle="tooltip"><button type="button" data-toggle="modal" data-target="#updtaccmodal' . $row['ins_id'] . '" class="btn btn-sm btn-inverse-primary btn-fw"><i class="fa fa-pencil"></i></button></div>
-                                                            <button class="btn btn-sm btn-inverse-danger btn-fw" data-placement="right" title="Delete Cutter" data-toggle="tooltip"  onclick="return showSwal(' . "'warning-message-and-cancel','../../Service/InstrumentService.php?serviceFlag=DELINS&ins_id=" . $row['ins_id'] . "&csrf_token=" . $clib->get_csrf_token(true) . "'" . ')"><i class="fa fa-trash"></i></button>  
+                                    . '<td>' . $row['serial'] . '</td>';
+                                    if ($_SESSION['user_type'] == 1) {
+                                        echo '<td><div class="btn-group" role="group" aria-label="Basic example">
+                                                            <div style="display: initial;" data-placement="left" title="View & Edit Instrument" data-toggle="tooltip"><button type="button" data-toggle="modal" data-target="#updtaccmodal' . $row['ins_id'] . '" class="btn btn-sm btn-inverse-primary btn-fw"><i class="fa fa-pencil"></i></button></div>
+                                                            <button class="btn btn-sm btn-inverse-danger btn-fw" data-placement="right" title="Delete Instrument" data-toggle="tooltip"  onclick="return showSwal(' . "'warning-message-and-cancel','../../Service/InstrumentService.php?serviceFlag=DELINS&ins_id=" . $row['ins_id'] . "&csrf_token=" . $clib->get_csrf_token(true) . "'" . ')"><i class="fa fa-trash"></i></button>  
                                                         </div>';
-
+                                    }
                                     echo '<!-- Modal Edit Instrument-->
     <div class="modal fade "  id="updtaccmodal' . $row['ins_id'] . '" tabindex="-1" role="dialog"
          aria-labelledby="AddCutterModel" aria-hidden="true">

@@ -11,9 +11,12 @@ include '../Common/leftmenu.php';
     <div class="card" >
         <?php include '../Common/showMessage.php'; ?>
         <div class="card-body" >
-            <h4 class="card-title">All Music</h4>
-            <div style="display: initial;" data-placement="right" title="Add Music" data-toggle="tooltip"><button data-toggle="modal" data-target="#AddCutter" type="button"  class="btn btn-inverse-primary btn-fw"><i  class="fa fa-plus"></i></button></div> 
-
+            <h4 class="card-title">All Music</h4>            
+            <?php
+            if ($_SESSION['user_type'] == 1) {
+                echo '<div style="display: initial;" data-placement="right" title="Add Music" data-toggle="tooltip"><button data-toggle="modal" data-target="#AddCutter" type="button"  class="btn btn-inverse-primary btn-fw"><i  class="fa fa-plus"></i></button></div>';
+            }
+            ?>
             <!-- Modal Add Customer-->
             <div class="modal fade "   id="AddCutter"  tabindex="-1" role="dialog"
                  aria-labelledby="AddMemberModel" aria-hidden="true">
@@ -86,9 +89,13 @@ include '../Common/leftmenu.php';
                                     <th>Name</th>
                                     <th>Genre</th>
                                     <th>Composer</th>                                  
-                                    <th>Arranger</th> 
-                                    <th>File Number</th> 
-                                    <th>Action</th>
+                                    <th>Arranger</th>                                     
+                                    <?php
+                                    if ($_SESSION['user_type'] == 1) {
+                                        echo '<th>File Number</th>';
+                                        echo '<th>Action</th>';
+                                    }
+                                    ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -99,12 +106,14 @@ include '../Common/leftmenu.php';
                                     echo '<tr>
                                                         <td>' . $row['name'] . '</td>
                                                        <td>' . $row['genre'] . '</td>'
-                                    . '<td>' . $row['composer'] . '</td>' . '<td>' . $row['arranger'] . '</td>' . '<td><a href="../../Service/'.$row['music_file'].'" target="blank">' . $row['file_number'] . '</a></td>'
-                                    . '<td><div class="btn-group" role="group" aria-label="Basic example">
-                                                            <div style="display: initial;" data-placement="left" title="View & Edit Cutter" data-toggle="tooltip"><button type="button" data-toggle="modal" data-target="#music_id' . $row['music_id'] . '" class="btn btn-sm btn-inverse-primary btn-fw"><i class="fa fa-pencil"></i></button></div>
+                                    . '<td>' . $row['composer'] . '</td>' . '<td>' . $row['arranger'] . '</td>';
+                                    if ($_SESSION['user_type'] == 1) {
+                                        echo '<td><a href="../../Service/' . $row['music_file'] . '" target="blank">' . $row['file_number'] . '</a></td>'
+                                        . '<td><div class="btn-group" role="group" aria-label="Basic example">
+                                                            <div style="display: initial;" data-placement="left" title="View & Edit Music" data-toggle="tooltip"><button type="button" data-toggle="modal" data-target="#music_id' . $row['music_id'] . '" class="btn btn-sm btn-inverse-primary btn-fw"><i class="fa fa-pencil"></i></button></div>
                                                             <button class="btn btn-sm btn-inverse-danger btn-fw" data-placement="right" title="Delete Music" data-toggle="tooltip"  onclick="return showSwal(' . "'warning-message-and-cancel','../../Service/MusicService.php?serviceFlag=DELMUSIC&music_id=" . $row['music_id'] . "&csrf_token=" . $clib->get_csrf_token(true) . "'" . ')"><i class="fa fa-trash"></i></button>  
                                                         </div>';
-
+                                    }
                                     echo '<!-- Modal Edit Uniform-->
     <div class="modal fade "  id="music_id' . $row['music_id'] . '" tabindex="-1" role="dialog"
          aria-labelledby="AddCutterModel" aria-hidden="true">
@@ -150,7 +159,7 @@ include '../Common/leftmenu.php';
                                                 <label for="file_number">File Number</label>
                                                 <input id="file_number" value="' . $row['file_number'] . '" type="text" name="file_number" class="form-control" required >
                                             </div><div class="form-group col-md-12 icon_input_container">
-                                                <label for="music_file">Music File : <a href="../../Service/'.$row['music_file'].'" target="blank">' . $row['file_number'] . '</a></label>                                                
+                                                <label for="music_file">Music File : <a href="../../Service/' . $row['music_file'] . '" target="blank">' . $row['file_number'] . '</a></label>                                                
                                                 <input id="music_file" type="file" name="music_file" class="form-control" required >
                                             </div>
                                         </div>

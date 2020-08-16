@@ -55,8 +55,8 @@ include '../Common/leftmenu.php';
                                     <tr>
                                         <th>Type</th>
                                         <th>Sizes</th>
-                                        <th>ID Mark</th> 
-                                        <th>Quantity</th>
+                                        <th>ID Mark</th>
+                                        <th>Select</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,7 +76,7 @@ include '../Common/leftmenu.php';
                                             <td>
                                                 <?php echo $row["id_marking"]; ?>
                                             </td>
-                                            <td><input class="form-control" type="number" name="qty[<?php echo $row["uniform_id"]; ?>]" value="0" min="0" required="required" /></td>
+                                            <td><input class="form-control" type="checkbox" name="qty[<?php echo $row["uniform_id"]; ?>]" value="1" /></td>
                                         </tr>
                                     <?php }
                                     ?>

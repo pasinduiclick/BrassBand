@@ -31,8 +31,7 @@ $ref_number = "INS" . date("mdhi");
                                                 <th>Type</th>
                                                 <th>Make</th>
                                                 <th>Model</th>
-                                                <th>Serial</th>
-                                                <th>Quantity</th>
+                                                <th>Serial</th>                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -56,7 +55,7 @@ $ref_number = "INS" . date("mdhi");
                                                 <td class="text-left"><?php echo $row2["make"]; ?></td>
                                                 <td class="text-left"><?php echo $row2["model"]; ?></td>
                                                 <td class="text-left"><?php echo $row2["serial"]; ?></td>
-                                                <td><?php echo $_POST['qty'][$row2["ins_id"]]; ?><input type="hidden" value="<?php echo $_POST['qty'][$row2["ins_id"]]; ?>" name="qty[<?php echo $row2["ins_id"]; ?>]"/></td>                                                                                        
+                                                <td><input type="hidden" value="<?php echo $_POST['qty'][$row2["ins_id"]]; ?>" name="qty[<?php echo $row2["ins_id"]; ?>]"/></td>                                                                                        
                                                 </tr>
                                                 <?php
                                             }

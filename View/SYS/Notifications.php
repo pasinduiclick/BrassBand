@@ -23,14 +23,13 @@ include '../Common/leftmenu.php';
                                     <th>Member</th>    
                                     <th>Type</th>    
                                     <th>Issue Date</th>
-                                    <th>Return Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 <?php
-                                $query = "select * from notifications n, membership m WHERE n.member=m.mem_id AND n.status = 1 GROUP BY n.ref_number";
+                                $query = "select * from notifications n, membership m WHERE n.member=m.mem_id AND n.status = 1 GROUP BY n.ref_number order by issue_date desc";
                                 $result = $databaseConnection->openConnection()->query($query);
                                 while ($row = $result->fetch_assoc()) {
                                     echo '<tr>
@@ -38,7 +37,6 @@ include '../Common/leftmenu.php';
                                                        <td>' . $row['name'] . '</td>'
                                             .'<td>' . $row['type'] . '</td>'
                                     . '<td>' . $row['issue_date'] . '</td>'
-                                    . '<td>' . $row['return_date'] . '</td>'
                                     . '<td><div class="btn-group" role="group" aria-label="Basic example">                                                            
                                                             <button class="btn btn-sm btn-inverse-danger btn-fw" data-placement="right" title="Clear" data-toggle="tooltip"  onclick="return showSwal(' . "'warning-message-and-cancel','../../Service/IssueService.php?serviceFlag=CLEARNOTIFY&ref_number=" . $row['ref_number'] . "&csrf_token=" . $clib->get_csrf_token(true) . "'" . ')"><i class="fa fa-trash"></i></button>  
                                                         </div></td><tr>';
